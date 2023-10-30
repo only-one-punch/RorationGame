@@ -88,7 +88,6 @@ export class Simulator {
     }
 
     removeAgent(aid: number) {
-        console.log(aid);
         if(this.hasAgent(aid)) {
             delete this.aid2agent[aid];
             let idx = this.agentIdLst.indexOf(aid);
