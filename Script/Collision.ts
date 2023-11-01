@@ -79,12 +79,11 @@ export class Collisiion extends Component {
     public needToHandleCollision:Node [] = [];
     allTargetLattic(){
         const weaponIndex = this.calculateTargetLattice(this.player);
+        //这里是遍历了所有的敌人对象，所以这里检测的是所有和玩家处在同一格子的所有对象，我们添加敌人对象直接添加到enemytree也可以实现检测。
         for(let i = 0 ; i < this.enemies.length ; i ++){
             const result = this.calculateTargetLattice(this.enemies[i]);
             if(weaponIndex === result){
                 this.needToHandleCollision.push(this.enemies[i]);
-            }else{
-
             }
         };
         this.detectObjectInGrid();
@@ -101,31 +100,31 @@ export class Collisiion extends Component {
      * 圆与圆：(x1-x2)^2 + (y1-y2)^2 < (r1 + r2) ^ 2;
      * 矩形与圆：|x1 - x2| < r1 + 1/2 * W && |y1 - y2| < r1 + 1/2 * H;
      */
-    collisionOf_01(target01:Node,target02:Node){
+    collisionOf_01(enemy:Node,target:Node){
         const positionOf01 = v3();
-        target01.getWorldPosition(positionOf01);
+        enemy.getWorldPosition(positionOf01);
         const positionOf02 = v3();
-        target02.getWorldPosition(positionOf02);
-        const contentSizeOf01 = target01.children[0].getComponent(UITransform).contentSize;
-        const contentSizeOf02 = target02.children[0].getComponent(UITransform).contentSize;
+        target.getWorldPosition(positionOf02);
+        const contentSizeOf01 = enemy.children[0].getComponent(UITransform).contentSize;
+        const contentSizeOf02 = target.children[0].getComponent(UITransform).contentSize;
         const minDistanceOfX = Math.abs(positionOf01.x - positionOf02.x) - (contentSizeOf01.x + contentSizeOf02.x)/2;
         const minDistanceOfY = Math.abs(positionOf01.y - positionOf02.y) - (contentSizeOf01.y + contentSizeOf02.y)/2;
         if(minDistanceOfX < 0 && minDistanceOfY < 0){
             //碰撞处理
-            this.collisionHanding(target01);
-            target01.getComponent(EnemySetting).isAttack = true;
+            this.collisionHanding(enemy);
+            enemy.getComponent(EnemySetting).isAttack = true;
 
         }else{
-            const index = this.needToHandleCollision.indexOf(target01);
+            const index = this.needToHandleCollision.indexOf(enemy);
             if(index !== -1){
                 this.needToHandleCollision.splice(index,1);
-                this.scheduleOnce(()=>{target01.getComponent(EnemySetting).isAttack = false;},1);
+                this.scheduleOnce(()=>{enemy.getComponent(EnemySetting).isAttack = false;},1);
                 
             }
         }
     }
     //碰撞处理
-    //因为rvo需要每帧设置物体的位置，所以我需要给它一个单独的属性。
+    //因为rvo需要每帧设置物体的位置，所以我需要给它一个单独的属性。isAttack
     //所以敌人需要有一个属于自己的信息才能共享。
     collisionHanding(target:Node){
         // target.setWorldPosition(0,0,0);

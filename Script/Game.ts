@@ -1,4 +1,4 @@
-import { _decorator, Camera, Component, Node } from 'cc';
+import { _decorator, Camera, Component, Node, Script } from 'cc';
 const { ccclass, property } = _decorator;
 import { EnemyNode } from './EnemyNode';
 
@@ -12,11 +12,14 @@ export class Game extends Component {
 
     @property(Node)
     UI_Panel:Node;
+
+    public gameTime = 0;
     start() {
         console.log(this.player.worldPosition)
     }
 
     update(deltaTime: number) {
+        this.gameTime += deltaTime;
         //相机跟随
         this.mainCamera.node.setWorldPosition(this.player.worldPosition);
         //遥感UI跟随

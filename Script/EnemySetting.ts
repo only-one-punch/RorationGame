@@ -18,6 +18,7 @@ export class EnemySetting extends Component {
     public healthPotionRewardChance:number = 0;
     public magnetRewardChance:number = 0;
     public chestRewardChance:number = 0;
+
     public enemies:Prefab [] = [];
     public playerWorldPosition:Vec3;
     public player:Node;
@@ -27,39 +28,48 @@ export class EnemySetting extends Component {
     public isAttack:boolean = false;
     init(name:string){
         const enemy = new this.gameSetting[name]();
+        console.log(enemy);
         this._name = enemy.name;
         this.moveType = enemy.moveType;
+        this.health = enemy.health;
+        this.damage = enemy.damage;
+        this.speed  = enemy.speed;
+        this.xpReward = enemy.xpReward;
+        this.goldReward = enemy.goldReward;
+        this.healthPotionRewardChance = enemy.healthPotionRewardChance;
+        this.magnetRewardChance = enemy.magnetRewardChance;
+        this.chestRewardChance = enemy.chestRewardChance;     
     }
-    start() {
-        this.greenGhostStatic =  new( this.gameSetting.GreenGhost);
-        console.log(this.greenGhostStatic.health);
-        this.player = find("Game/Player");
-        this.node.getScale(scaleTmp);
-    }
+//     start() {
+//         this.greenGhostStatic =  new( this.gameSetting.GreenGhost);
+//         console.log(this.greenGhostStatic.health);
+//         this.player = find("Game/Player");
+//         this.node.getScale(scaleTmp);
+//     }
 
-    update(deltaTime: number) {
-        this.getEnemyMovePos();
-    }
-    //AaaBbb
+//     update(deltaTime: number) {
+//         this.getEnemyMovePos();
+//     }
+//     //AaaBbb
     
-    //enmey的移动，通过设置角速度来控制
+//     //enmey的移动，通过设置角速度来控制
     
-    getEnemyMovePos(){
-        this.player.getWorldPosition(tmp);
-        this.playerWorldPosition = tmp;
-        const direction = this.playerWorldPosition.subtract(this.node.worldPosition).normalize();
-        const scaleX =scaleTmp.x;
-        if(direction.x > 0){           
-            this.node.setScale(scaleX,scaleTmp.y,scaleTmp.z);
-        }else{
-            this.node.setScale(-scaleX,scaleTmp.y,scaleTmp.z);
-        }
-        //设置移动速度
+//     getEnemyMovePos(){
+//         this.player.getWorldPosition(tmp);
+//         this.playerWorldPosition = tmp;
+//         const direction = this.playerWorldPosition.subtract(this.node.worldPosition).normalize();
+//         const scaleX =scaleTmp.x;
+//         if(direction.x > 0){           
+//             this.node.setScale(scaleX,scaleTmp.y,scaleTmp.z);
+//         }else{
+//             this.node.setScale(-scaleX,scaleTmp.y,scaleTmp.z);
+//         }
+//         //设置移动速度
         
-    }
+//     }
+// }
+// const tmp = v3();
+// const scaleTmp = v3();
+// const velocity_tmp = math.v2()
 }
-const tmp = v3();
-const scaleTmp = v3();
-const velocity_tmp = math.v2()
-
 

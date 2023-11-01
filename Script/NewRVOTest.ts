@@ -2,6 +2,7 @@ import { _decorator, Component, instantiate, Node, Prefab, v2, v3, Vec2, Vec3 } 
 import { Simulator } from './RVO/Simulator';
 import { RVOMath, Vector2 } from './RVO/Common';
 import { EnemySetting } from './EnemySetting';
+import { Collisiion } from './Collision';
 const { ccclass, property } = _decorator;
 
 @ccclass('NewRVOTest')
@@ -16,12 +17,12 @@ export class NewRVOTest extends Component {
     player: Node;
 
     speed = 30;
-    enemyNumber: number = 100;
+    enemyNumber: number = 3;
     goals: Vec3[] = [];
     myEnemy: Node[] = [];
 
     start() {
-        let simulator = Simulator.instance;
+        let simulator = Simulator.instance; 
         simulator.setAgentDefaults(50, 8, 1, 1, 20, this.speed, new Vector2(0, 0));
         let playerWP = v3();
         this.player.getWorldPosition(playerWP);

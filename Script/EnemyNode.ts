@@ -14,6 +14,7 @@ export class EnemyNode extends Component {
         console.log();
         this.playerWorldPosition = find("Game/Player").getPosition(this.playerWorldPosition);//其实这里使获取到的是Player的worldPosition
         this.createEnemy('BlackGhost');
+        this.gameSetting.BlackGhost
         // for(let i = 0 ; i < 100 ; i ++ ){
         //     this.createEnemy("BlackGhost");
         // }
@@ -42,5 +43,7 @@ export class EnemyNode extends Component {
         const y = this.playerWorldPosition.y + r * Math.sin(radians);
         return v3(x, y);
     }
+
+    //所以这里完成的是一个生产
    
 }

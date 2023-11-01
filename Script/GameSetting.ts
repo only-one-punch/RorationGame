@@ -6,10 +6,10 @@ export class GameSetting extends Component {
     public BlackGhost = BlackGhostSettings;
     public BrownGhost = BrownGhostSettings;
     public GreenGhost = GreenGhostSettings;
-    public GrayWolfSettings = GrayWolfSettings;
-    public RedWolfSettings = RedWolfSettings;
-    public KitsuneSettings = KitsuneSettings;
-    public YamabushiSettings = YamabushiSettings;
+    public GrayWolf = GrayWolfSettings;
+    public RedWolf = RedWolfSettings;
+    public Kitsune = KitsuneSettings;
+    public Yamabushi = YamabushiSettings;
 }
 //player的基础数值
 export class PlayerSetting {
